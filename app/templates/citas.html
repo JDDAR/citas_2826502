@@ -24,7 +24,7 @@
               <th>Paciente</th>
               <th>Medico</th>
               <th>Consultorio</th>
-              <th>Valor cita</th>
+              <th>Ver detalles</th>
             </tr>
         </thead>
         <tbody>
@@ -35,7 +35,7 @@
                     <td>{{ cita.paciente.nombres }}</td>
                     <td>{{ cita.medico.nombres }}</td>
                     <td>{{ cita.consultorio.numero }}</td>
-                    <td>${{ cita.valor_cita }}</td>
+         
                 </tr>
             {% endfor %}      
         </tbody>

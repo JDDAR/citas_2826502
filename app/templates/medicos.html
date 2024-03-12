@@ -9,11 +9,16 @@
 </head>
 <body>
     <section style="padding-top: 65px;" class="container">
-    <nav style="padding-bottom: 35px;">
-        <a class="btn btn-secondary" href="http://127.0.0.1:5000/medicos">Medicos</a>
-        <a class="btn btn-success" href="http://127.0.0.1:5000/pacientes"> Pacientes </a>
-        <a class="btn btn-success" href="http://127.0.0.1:5000/consultorios">Consultorios </a>
-        <a class="btn btn-success" href="http://127.0.0.1:5000/citas">Citas</a>
+    <nav style="padding-bottom: 35px; display: flex; justify-content: space-between;">
+        <div>   
+            <a class="btn btn-secondary" href="http://127.0.0.1:5000/medicos">Medicos</a>
+            <a class="btn btn-success" href="http://127.0.0.1:5000/pacientes"> Pacientes </a>
+            <a class="btn btn-success" href="http://127.0.0.1:5000/consultorios">Consultorios </a>
+            <a class="btn btn-success" href="http://127.0.0.1:5000/citas">Citas</a>
+        </div>
+        <div>
+            <a class="btn btn-primary" href="http://127.0.0.1:5000/medicos/create">+ Crear nuevo Medico</a>
+        </div>
     </nav>
     <h2 style="margin-bottom: 35px;">LISTA DE MEDICOS</h2>
     <table class="table table-hover">
@@ -24,6 +29,7 @@
                 <th>Apellidos</th>
                 <th>N° Documento</th>
                 <th>Especialidad</th>
+                <th>Detalles</th>
             </tr>
         </thead>
         <tbody>
@@ -34,6 +40,7 @@
                     <td>{{ medico.apellidos }}</td>
                     <td>{{ medico.numero_identificacion}}</td>
                     <td>{{ medico.especialidad }}</td>
+                    <td><a href="/medicos/{{ medico.id }}">Ver Detalles</a></td>
                 </tr>
             {% endfor %}
         </tbody>
