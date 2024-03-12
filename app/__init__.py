@@ -16,10 +16,14 @@ app .config.from_object(Config)
 
 db = SQLAlchemy(app)
 ##creo el objeto para hacer migraciones 
-migrate = Migrate(app, db) 
+migrate = Migrate(app, db)
+
+##importando rutas 
+
+from . import routes 
 
 ## Importando los modelos  
-from .models import Medico
+from .models import Medico, Paciente, Consultorio, Cita
 
 ####Ejecutando el objeto ##
 if __name__ == '__main__':
