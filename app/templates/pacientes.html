@@ -69,6 +69,7 @@
               <th>Altura</th>
               <th>Tipo de sangre</th>
               <th>Detalles</th>
+              <th>Actualizar</th>
             </tr>
           </thead>
           <tbody>
@@ -81,6 +82,7 @@
               <td>{{ paciente.altura }}</td>
               <td>{{ paciente.tipo_sangre }}</td>
               <td><a href="/pacientes/{{ paciente.id }}">Ver detalles</a></td>
+              <td><a href="/pacientes/update/{{ paciente.id }}">Actualizar</a></td>
             </tr>
             {% endfor %}        
           </tbody>

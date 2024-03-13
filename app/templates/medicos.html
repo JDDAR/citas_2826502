@@ -42,9 +42,28 @@
       .sectionHomeTable H3 {
         font-weight: bold; 
       }
+      .mensaje {
+        width: 100%;
+        height: 35px;
+        background-color: #55a630;
+        color: white;
+        text-align: center;
+        list-style-type: none;
+        padding-top: 5px;
+      }
+
     </style>
   </head>
   <body>
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <ul class='flashes mensaje'>
+      {% for message in messages %}
+        <li>{{ message }}</li>
+      {% endfor %}
+        </ul>
+      {% endif %}
+    {% endwith %}
     <section class="container sectionHomeTable">
       <nav class="navPage" >
         <div>   
@@ -69,6 +88,8 @@
                 <th>N° Documento</th>
                 <th>Especialidad</th>
                 <th>Detalles</th>
+                <th>Actualizar</th>
+                <th>Eliminar</th>
               </tr>
             </thead>
             <tbody>
@@ -80,6 +101,8 @@
                 <td>{{ medico.numero_identificacion}}</td>
                 <td>{{ medico.especialidad }}</td>
                 <td><a href="/medicos/{{ medico.id }}">Ver Detalles</a></td>
+                <td><a href="/medicos/update/{{ medico.id}}">Actualizar</a></td>
+                <td><a href="/medicos/delete/{{ medico.id }}">Eliminar</a></td>
               </tr>
               {% endfor %}
             </tbody>

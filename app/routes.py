@@ -1,6 +1,6 @@
 from . import app, db
 from .models import Medico, Paciente, Consultorio, Cita 
-from flask import render_template, request
+from flask import render_template, request, flash, redirect
 
 @app.route('/medicos')
 def get_all_medicos():
@@ -74,7 +74,8 @@ def create_medico():
         ##añadirlo a sqlalchemy 
         db.session.add(new_medico)
         db.session.commit()
-        return "Medico registrado" 
+        flash("Medico registrado exitosamente")
+        return redirect('/medicos')
 
 ############### Creando rutas para nuevo paciente 
 @app.route('/pacientes/create', methods = ['GET' , 'POST'])
@@ -91,7 +92,8 @@ def create_paciente():
                                 )
         db.session.add(new_paciente)
         db.session.commit()
-        return "Paciente Registrado "
+        flash("Paciente registrado exitosamente")
+        return redirect('/Pacientes')
 
 ############## Creando Nuevos consultorios 
 
@@ -103,7 +105,8 @@ def create_consultorio():
         new_consultorio = Consultorio( numero = request.form['numero'] )
     db.session.add(new_consultorio)
     db.session.commit()
-    return 'consultorio creado '
+    flash("Consultorio registrado exitosamente")
+    return redirect('/consultorios')
 
 ############## Creando nuevas citas  
 
@@ -111,11 +114,42 @@ def create_consultorio():
 def create_cita():
     if(request.method == 'GET'):
         return render_template('cita_form.html') 
+
+############# Actualizaciones de datos  
+@app.route('/medicos/update/<int:id>', methods = ['GET', 'POST'])
+def update_medico(id):
+    especialidades = [ 'Cardiologia', 'Pediatria','Psicologia']
+    medico_update = Medico.query.get(id)
+    if(request.method == 'GET'):
+        return render_template('medico_update.html', medico_update = medico_update, especialidades = especialidades)
+    elif(request.method == 'POST'):
+        medico_update.nombres = request.form['nombres']
+        medico_update.apellidos = request.form['apellidos']
+        medico_update.tipo_identificacion = request.form['tipoID']
+        medico_update.numero_identificacion = request.form['numeroID']
+        medico_update.registro_medico = request.form['registroMedico']
+        medico_update.especialidad = request.form['especialidad']
+        db.session.commit()
+        flash("Medico actualizado exitosamente")
+        return redirect('/medicos')
+
+@app.route('/pacientes/update/<int:id>', methods = ['GET', 'POST'])
+def update_paciente(id):
+    paciente_update = Paciente.query.get(id)
+    if(request.method == 'GET'):
+        return render_template('paciente_update.html', paciente_update = paciente_update)
+
+
+############## Eliminando registro 
+
+@app.route('/medicos/delete/<int:id>')
+def delete_medico(id):
+    medico_delete = Medico.query.get(id)
+    db.session.delete(medico_delete)
+    db.session.commit()
+    flash("Medico eliminado exitosamente")
+    return redirect('/medicos')
+
+
+
     
-        
-        
-
-
-
-
-
