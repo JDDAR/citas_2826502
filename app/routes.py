@@ -22,6 +22,9 @@ def get_all_citas():
     citas = Cita.query.all()
     return render_template("citas.html", citas = citas)
 
+
+############# rutas para selecionar detalles 
+
 @app.route('/medicos/<int:id>')
 def get_medico_by_id(id):
     ##return 'id del medico: ' + str(id)
@@ -72,6 +75,47 @@ def create_medico():
         db.session.add(new_medico)
         db.session.commit()
         return "Medico registrado" 
+
+############### Creando rutas para nuevo paciente 
+@app.route('/pacientes/create', methods = ['GET' , 'POST'])
+def create_paciente():
+    if(request.method == 'GET'):
+        return render_template('paciente_form.html')
+    elif(request.method == 'POST'):
+        new_paciente = Paciente(nombres = request.form['nombres'],
+                                apellidos = request.form['apellidos'],
+                                tipo_identificacion = request.form['tipoID'],
+                                numero_identificacion = request.form['numeroID'],
+                                altura = request.form['altura'],
+                                tipo_sangre = request.form['tipoSangre']
+                                )
+        db.session.add(new_paciente)
+        db.session.commit()
+        return "Paciente Registrado "
+
+############## Creando Nuevos consultorios 
+
+@app.route('/consultorios/create', methods = ['GET', 'POST'])
+def create_consultorio():
+    if(request.method == 'GET'):
+        return render_template('consultorio_form.html')
+    elif(request.method == 'POST'):
+        new_consultorio = Consultorio( numero = request.form['numero'] )
+    db.session.add(new_consultorio)
+    db.session.commit()
+    return 'consultorio creado '
+
+############## Creando nuevas citas  
+
+@app.route('/citas/create', methods = ['GET', 'POST'])
+def create_cita():
+    if(request.method == 'GET'):
+        return render_template('cita_form.html') 
+    
+        
+        
+
+
 
 
 
