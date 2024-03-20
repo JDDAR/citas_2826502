@@ -49,4 +49,9 @@ Para crear entidades ----> ORM  --> Objet relational mapper
     Crear los modelo 
     crear el entorno para las migraciones 
     >flask db init
-    
+
+
+-----------------------------------------------------------------------------------------
+
+CLIENTE - SERVIDOR (ARQUITECTURA DE SOFTWARE )
+
